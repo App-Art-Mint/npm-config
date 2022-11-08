@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/config",
   "author": "Samuel T Underwood",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Config files for the @sunderapps suite of npm libraries",
   "keywords": [
@@ -22,7 +22,7 @@
   "main": "dist/js/index.min.js",
   "types": "dist/js/index.d.ts",
   "bin": {
-    "@sunderapps/setup": "dist/js/setup.min.js"
+    "sun-setup": "dist/js/setup.min.js"
   },
   "files": [
     "dist/**/*.{css,js,d.ts,map}"

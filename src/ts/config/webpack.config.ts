@@ -34,7 +34,8 @@ export const sunWebpackConfig: webpack.Configuration = {
             name: `${sunConfig.prefix}[name]`,
             type: 'umd',
             export: 'default'
-        }
+        },
+        globalObject: 'this'
     },
     module: {
         rules: [

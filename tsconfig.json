@@ -106,7 +106,8 @@
   ],
   "typedocOptions": {
     "entryPoints": [
-      "src/ts/index.ts"
+      "src/ts/bin/setup.ts",
+      "src/ts/config/webpack.config.ts",
     ],
     "includeVersion": true,
     "json": "docs/typedoc.json",

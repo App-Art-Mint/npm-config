@@ -11,6 +11,7 @@ export const sunProd: boolean = process.env.NODE_ENV?.toLowerCase() === 'product
 
 export const sunDirs: {[key: string]: string} = {
     src: process.env.npm_package_config_dirs_src ?? 'src',
+    bin: process.env.npm_package_config_dirs_bin ?? 'bin',
     config: process.env.npm_package_config_dirs_config ?? 'config',
     imports: process.env.npm_package_config_dirs_imports ?? 'imports',
     scss: process.env.npm_package_config_dirs_scss ?? 'scss',

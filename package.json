@@ -1,10 +1,13 @@
 {
   "name": "@sunderapps/config",
   "author": "Samuel T Underwood",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Config files for the @sunderapps suite of npm libraries",
   "keywords": [
+    "sunderapps",
+    "sunder-apps",
+    "sunder",
     "config",
     "npm",
     "webpack",
@@ -19,8 +22,8 @@
   "bugs": {
     "url": "https://github.com/Sunder-Apps/config/issues"
   },
-  "main": "dist/js/index.min.js",
-  "types": "dist/js/index.d.ts",
+  "main": "dist/js/webpack.config.min.js",
+  "types": "dist/js/config/webpack.config.d.ts",
   "bin": {
     "sun-setup": "dist/js/setup.min.js"
   },
@@ -42,20 +45,17 @@
       "test": "test",
       "src": "src",
       "config": "config",
-      "imports": "imports",
       "scss": "scss",
       "ts": "ts",
-      "dist": "dist",
-      "css": "css",
-      "js": "js"
+      "dist": "dist"
     }
   },
   "scripts": {
-    "prepare": "npm run build:all",
+    "prepare": "npm run package",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
     "postversion": "git push && git push --tags",
-    "build:all": "npm run build && npm run build:prod && npm run build:index && npm run build:index:prod && npm run build:config && npm run build:config:prod && npm run build:tsdoc",
+    "package": "npm-run-all clean build build:**",
     "build": "webpack --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:index": "cross-env BUILD_MODE=index npm run build",
@@ -63,9 +63,9 @@
     "build:config": "cross-env BUILD_MODE=config npm run build",
     "build:config:prod": "cross-env NODE_ENV=production BUILD_MODE=config npm run build",
     "build:tsdoc": "typedoc",
-    "watch": "webpack --watch --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
+    "watch": "npm run build -- --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
-    "watch:tsdoc": "typedoc --watch",
+    "watch:tsdoc": "npm run build:tsdoc -- --watch",
     "clean": "rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
     "clear": "npm run clean",
     "test": "echo '\nRun tests here!\n'"
@@ -82,10 +82,20 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "glob": "^8.0.3",
+    "jasmine-core": "^4.5.0",
+    "karma": "^6.4.1",
+    "karma-babel-preprocessor": "^8.0.2",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-typescript-preprocessor": "^0.4.0",
+    "karma-webpack": "^5.0.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
+    "sassdoc": "^2.7.4",
     "ts-loader": "^9.4.1",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.19",

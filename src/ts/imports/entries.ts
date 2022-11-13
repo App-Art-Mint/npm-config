@@ -41,7 +41,7 @@ export function sunAddEntry (entries: {[key: string]: string},
  * Typescript Entries
  */
 export const sunTSEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.ts}/{!(${sunConfig.index})${sunConfig.exts.ts},!(${sunConfig.dirs.imports}|${sunConfig.dirs.config})/**/*${sunConfig.exts.ts}}`)
+    glob.sync(`${sunConfig.paths.ts}/{!(${sunConfig.index})${sunConfig.exts.ts},!(${sunConfig.dirs.bin}|${sunConfig.dirs.config}|${sunConfig.dirs.imports})/**/*${sunConfig.exts.ts}}`)
     .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
 
 /**
@@ -55,7 +55,7 @@ export const sunIndexEntries: {[key: string]: string} =
  * Configuration Entries
  */
 export const sunConfigEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.ts}/${sunConfig.dirs.config}/**/*${sunConfig.exts.ts}`)
+    glob.sync(`${sunConfig.paths.ts}/{${sunConfig.dirs.bin},${sunConfig.dirs.config}}/**/*${sunConfig.exts.ts}`)
     .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
 
 /**

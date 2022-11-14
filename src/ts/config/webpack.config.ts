@@ -10,7 +10,7 @@ const LowerCaseNamePlugin = require('webpack-lowercase-name');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 import sunConfig from '../imports/config';
 import { sunTSEntries, sunIndexEntries,
-         sunConfigEntries, sunSCSSEntries } from '../imports/entries';
+         sunNodeEntries, sunSCSSEntries } from '../imports/entries';
 import sunBabelConfig from '../imports/babel.config';
 import sunServerConfig from '../imports/server.config';
 import sunIndexConfig from '../imports/webpack.index';
@@ -100,7 +100,7 @@ export const sunActiveConfig: webpack.Configuration =
     : sunConfig.mode === 'config' ? {
         ...sunWebpackConfig,
         ...sunNodeConfig,
-        entry: sunConfigEntries
+        entry: sunNodeEntries
     }
     : sunWebpackConfig;
 export default sunActiveConfig;

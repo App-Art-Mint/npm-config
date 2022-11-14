@@ -52,9 +52,9 @@ export const sunIndexEntries: {[key: string]: string} =
     .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
 
 /**
- * Configuration Entries
+ * Node Entries
  */
-export const sunConfigEntries: {[key: string]: string} =
+export const sunNodeEntries: {[key: string]: string} =
     glob.sync(`${sunConfig.paths.ts}/{${sunConfig.dirs.bin},${sunConfig.dirs.config}}/**/*${sunConfig.exts.ts}`)
     .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
 

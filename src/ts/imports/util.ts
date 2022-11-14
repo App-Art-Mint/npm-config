@@ -3,6 +3,31 @@
  */
 export abstract class sunUtil {
     /**
+     * Emojis
+     */
+    static utf8: {[key: string]: string} = {
+        alert: '🚨',
+        bang: '❗',
+        bangRed: '❗',
+        bangWhite: '❕',
+        check: '✅',
+        finish: '🏁',
+        success: '✅',
+        ok: '🆗',
+        q: '❓',
+        question: '❓',
+        run: '🏃',
+        running: '🏃',
+        close: '❌',
+        cross: '❌',
+        x: '❌',
+        info: 'ℹ️',
+        warn: '⚠️',
+        sad: '😢',
+        new: '🆕'
+    };
+
+    /**
      * Sorts an object's keys alphabetically
      */
     static sortObject (object: any) : Object {
@@ -10,7 +35,7 @@ export abstract class sunUtil {
             obj[key] = object[key];
             return obj;
         }, {});
-    }
+    };
 
     /**
      * Removes object keys and values
@@ -22,6 +47,6 @@ export abstract class sunUtil {
             }
             return obj;
         }, {});
-    }
+    };
 };
 export default sunUtil;

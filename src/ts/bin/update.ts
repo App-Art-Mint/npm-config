@@ -11,9 +11,9 @@ import ps from 'prompt-sync';
 import sunUtil from '../imports/util';
 
 /**
- * Setup for the @sunderapps npm library suite
+ * Update / setup for the @sunderapps npm library suite
  */
-export class sunSetup {
+export class sunUpdate {
     /**
      * Values to add to the package.json
      */
@@ -63,7 +63,8 @@ export class sunSetup {
             '@types/prompt-sync',
             '@types/webpack',
             '@types/webpack-node-externals',
-            'glob'
+            'glob',
+            'webpack'
         ]
     };
 
@@ -159,12 +160,18 @@ export class sunSetup {
         const prompt: ps.Prompt = ps();
         let answers: {[key: string]: string} = {},
             settings: any = {};
-        console.log('\nRunning setup...\n',
-                    '\nHere is your updated package.json:\n',
+
+        if (JSON.stringify(this.oldPackageJson) === JSON.stringify(this.newPackageJson)) {
+            console.log(`\n${sunUtil.utf8.check} Your project is already up-to-date!\n`);
+            exit();
+        }
+
+        console.log('\nRunning update 🏃\n',
+                    `\n${sunUtil.utf8.new} Here is your updated package.json:\n`,
                     this.newPackageJson,
                     '\n\n');
         do {
-            answers.overwrite = prompt('Overwrite package.json? [Y/n]: ');
+            answers.overwrite = prompt(`${sunUtil.utf8.q} Overwrite package.json? [Y/n]: `);
             switch (answers.overwrite.toLowerCase()) {
                 case '':
                 case 'y':
@@ -173,21 +180,22 @@ export class sunSetup {
                     break;
                 case 'n':
                 case 'no':
-                    console.log('\nExiting without overwriting package.json.\n\n');
+                    console.log(`\n${sunUtil.utf8.x} Exiting without overwriting package.json.\n\n`);
                     exit();
                 default:
-                    console.log('\nInvalid input. Please try again.\n\n');
+                    console.log(`\n${sunUtil.utf8.alert} Invalid input ${sunUtil.utf8.sad} Please try again.\n\n`);
             }
         } while (!settings.overwrite);
 
         fs.writeFile(path.resolve('package.json'), JSON.stringify(this.newPackageJson, null, 2), err => {
             if (err) {
-                console.log(`An error occurred writing to package.json: ${err}`);
+                console.error(`\n${sunUtil.utf8.x} An error occurred writing to package.json: ${err}\n`);
                 exit(1);
             }
             cp.execSync('npm i', { stdio: 'inherit' });
+            console.log(`\n${sunUtil.utf8.check} Update complete! ${sunUtil.utf8.finish}\n`);
         });
-    }
+    };
 };
-export default sunSetup;
-new sunSetup();
+export default sunUpdate;
+new sunUpdate();

@@ -3,8 +3,12 @@
 /**
  * Imports
  */
+import cp from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { exit } from 'process';
+import ps from 'prompt-sync';
+import sunUtil from '../imports/util';
 
 /**
  * Setup for the @sunderapps npm library suite
@@ -44,11 +48,19 @@ export class sunSetup {
         },
         scripts: {
             build: 'webpack --config $npm_package_config_webpack',
-            'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json'
+            'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
+            serve: 'webpack serve --config $npm_package_config_webpack',
+            'update:config': 'npm up -D @sunderapps/config',
+            'update:util': 'npm up @sunderapps/util',
+        },
+        dependencies: {
+            '@sunderapps/util': '^0.2.0'
         },
         ignoreDependencies: [
             '@types/glob',
             '@types/node',
+            '@types/npm',
+            '@types/prompt-sync',
             '@types/webpack',
             '@types/webpack-node-externals',
             'glob'
@@ -57,13 +69,24 @@ export class sunSetup {
 
     /**
      * The package.json object for this project
+     * TODO: maybe unsync these?
      */
-    private thisPackageJson: any = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'node_modules/@sunderapps/config/package.json'), 'utf8'));
+    private thisPackageJson: any = JSON.parse(fs.readFileSync(path.resolve('node_modules/@sunderapps/config/package.json'), 'utf8'));
 
     /**
      * The original package.json object for the current project
+     * TODO: maybe unsync these?
      */
     private oldPackageJson: any = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'utf8'));
+
+    /**
+     * The new scripts to write to the package.json
+     */
+     private newScripts: any = sunUtil.sortObject({
+        ...this.oldPackageJson.scripts,
+        ...this.thisPackageJson.scripts,
+        ...this.updates.scripts
+    });
 
     /**
      * The new package.json object for the current project
@@ -75,8 +98,10 @@ export class sunSetup {
         license: this.oldPackageJson.license ?? 'MIT',
         description: this.oldPackageJson.description ?? '',
         keywords: [
-            ...this.updates.keywords,
-            ...this.oldPackageJson.keywords
+            ...new Set([
+                ...this.updates.keywords,
+                ...this.oldPackageJson.keywords.sort()
+            ])
         ],
         homepage: this.oldPackageJson.homepage ?? 'https://www.sunderapps.com',
         repository: this.oldPackageJson.repository ?? {},
@@ -85,32 +110,84 @@ export class sunSetup {
         types: this.updates.types,
         files: this.updates.files,
         directories: this.updates.directories,
-        publishConfig: {
+        publishConfig: sunUtil.sortObject({
             ...this.oldPackageJson.publishConfig,
             ...this.updates.publishConfig
-        },
-        config: {
+        }),
+        config: sunUtil.sortObject({
             ...this.oldPackageJson.config,
             ...this.updates.config
-        },
+        }),
         scripts: {
-            ...this.oldPackageJson.scripts,
-            ...this.thisPackageJson.scripts,
-            ...this.updates.scripts
+            package: this.newScripts.package,
+            prepare: this.newScripts.prepare,
+            preversion: this.newScripts.preversion,
+            version: this.newScripts.version,
+            postversion: this.newScripts.postversion,
+            clean: this.newScripts.clean,
+            clear: this.newScripts.clear,
+            build: this.newScripts.build,
+            'build:prod': this.newScripts['build:prod'],
+            'build:index': this.newScripts['build:index'],
+            'build:index:prod': this.newScripts['build:index:prod'],
+            'build:config': this.newScripts['build:config'],
+            'build:config:prod': this.newScripts['build:config:prod'],
+            'build:tsdoc': this.newScripts['build:tsdoc'],
+            'build:sassdoc': this.newScripts['build:sassdoc'],
+            watch: this.newScripts.watch,
+            'watch:prod': this.newScripts['watch:prod'],
+            'watch:tsdoc': this.newScripts['watch:tsdoc'],
+            test: this.newScripts.test,
+            ...sunUtil.sortObject(this.newScripts)
         },
-        dependencies: this.oldPackageJson.dependencies ?? {},
-        devDependencies: {
+        dependencies: sunUtil.sortObject({
+            ...this.oldPackageJson.dependencies,
+            ...this.updates.dependencies
+        }),
+        devDependencies: sunUtil.sortObject({
             ...this.oldPackageJson.devDependencies,
-            ...this.thisPackageJson.devDependencies
-                .filter((dependency: string) => !this.updates.ignoreDependencies.includes(dependency))
-        }
-    }
+            ...sunUtil.sortObject(
+                sunUtil.removeObjectEntries(
+                    this.thisPackageJson.devDependencies,
+                    this.updates.ignoreDependencies
+                )
+            )
+        })
+    };
 
     constructor () {
-        console.log('\nRunning setup...\n');
-                
-        console.log(this.thisPackageJson, this.oldPackageJson, this.newPackageJson);
+        const prompt: ps.Prompt = ps();
+        let answers: {[key: string]: string} = {},
+            settings: any = {};
+        console.log('\nRunning setup...\n',
+                    '\nHere is your updated package.json:\n',
+                    this.newPackageJson,
+                    '\n\n');
+        do {
+            answers.overwrite = prompt('Overwrite package.json? [Y/n]: ');
+            switch (answers.overwrite.toLowerCase()) {
+                case '':
+                case 'y':
+                case 'yes':
+                    settings.overwrite = true;
+                    break;
+                case 'n':
+                case 'no':
+                    console.log('\nExiting without overwriting package.json.\n\n');
+                    exit();
+                default:
+                    console.log('\nInvalid input. Please try again.\n\n');
+            }
+        } while (!settings.overwrite);
+
+        fs.writeFile(path.resolve('package.json'), JSON.stringify(this.newPackageJson, null, 2), err => {
+            if (err) {
+                console.log(`An error occurred writing to package.json: ${err}`);
+                exit(1);
+            }
+            cp.execSync('npm i', { stdio: 'inherit' });
+        });
     }
-}
+};
 export default sunSetup;
 new sunSetup();

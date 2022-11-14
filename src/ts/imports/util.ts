@@ -1,0 +1,27 @@
+/**
+ * Util functions for the config library
+ */
+export abstract class sunUtil {
+    /**
+     * Sorts an object's keys alphabetically
+     */
+    static sortObject (object: any) : Object {
+        return Object.keys(object).sort().reduce((obj: any, key: string) => {
+            obj[key] = object[key];
+            return obj;
+        }, {});
+    }
+
+    /**
+     * Removes object keys and values
+     */
+    static removeObjectEntries (object: any, keys: string[]) : Object {
+        return Object.keys(object).reduce((obj: any, key: string) => {
+            if (!keys.includes(key)) {
+                obj[key] = object[key];
+            }
+            return obj;
+        }, {});
+    }
+};
+export default sunUtil;

@@ -56,7 +56,7 @@ export class sunUpdate {
         dependencies: {
             '@sunderapps/util': '^0.2.0'
         },
-        ignoreDependencies: [
+        ignoreDevDependencies: [
             '@types/glob',
             '@types/node',
             '@types/npm',
@@ -147,12 +147,11 @@ export class sunUpdate {
         }),
         devDependencies: sunUtil.sortObject({
             ...this.oldPackageJson.devDependencies,
-            ...sunUtil.sortObject(
-                sunUtil.removeObjectEntries(
-                    this.thisPackageJson.devDependencies,
-                    this.updates.ignoreDependencies
-                )
-            )
+            ...sunUtil.removeObjectEntries(
+                this.thisPackageJson.devDependencies,
+                this.updates.ignoreDevDependencies
+            ),
+            '@sunderapps/config': `^${this.thisPackageJson.version}`
         })
     };
 

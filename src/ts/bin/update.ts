@@ -50,6 +50,7 @@ export class sunUpdate {
             build: 'webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'webpack serve --config $npm_package_config_webpack',
+            update: 'npm r -D @sunderapps/config && npm i -D @sunderapps/config && sunderapps-config',
             'update:config': 'npm up -D @sunderapps/config',
             'update:util': 'npm up @sunderapps/util',
         },

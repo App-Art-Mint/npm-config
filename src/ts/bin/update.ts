@@ -156,6 +156,7 @@ export class sunUpdate {
     };
 
     constructor () {
+        console.log(this.oldPackageJson, this.thisPackageJson, this.newPackageJson);
         const prompt: ps.Prompt = ps();
         let answers: {[key: string]: string} = {},
             settings: any = {};

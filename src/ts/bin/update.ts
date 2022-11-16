@@ -53,9 +53,6 @@ export class sunUpdate {
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
-        utilScripts: {
-            endversion: `echo '\nREMEMBER TO UPDATE THE VERSION IN @sunderapps/config/src/ts/bin/update.ts and publish that too!\n'`,
-        },
         dependencies: {
             '@sunderapps/util': '^0.3.1'
         },
@@ -167,10 +164,6 @@ export class sunUpdate {
         const prompt: ps.Prompt = ps();
         let answers: {[key: string]: string} = {},
             settings: any = {};
-
-        if (this.oldPackageJson.name === '@sunderapps/util') {
-            this.newPackageJson.scripts.endversion = this.updates.utilScripts.endversion;
-        }
 
         if (sunUtil.isSuperset(this.oldPackageJson, this.newPackageJson)) {
             console.log(`\n${sunUtil.utf8.check} Your project is already up-to-date!\n`);

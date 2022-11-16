@@ -1,3 +1,5 @@
+import { exit } from "process";
+
 /**
  * Util functions for the config library
  */
@@ -59,6 +61,7 @@ export abstract class sunUtil {
      */
      static isSuperset (superset: any, subset: any) : boolean {
         console.log(superset, '\n\n\n', subset);
+        exit();
         let isSuperset: boolean = true;
         
         // Base case - if the objects are equal, it is a superset

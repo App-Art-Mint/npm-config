@@ -57,40 +57,40 @@ export abstract class sunUtil {
      * @param superset - the object to check
      * @param subset - the object whose entries are required
      * @returns - true if the first object is a superset of the second
-     * @recursive
+     * @recursive - (kind of - calls other functions that call this function)
      */
-     static isSuperset (superset: any, subset: any) : boolean {
-        console.log(superset, '\n\n\n', subset);
-        if (superset === 'f' || superset === 's') {
-            exit();
-        }
+    static isSuperset (superset: any, subset: any) : boolean {
         let isSuperset: boolean = true;
-        
-        // Base case - if the objects are equal, it is a superset
+
         if (superset === subset) {
-            return isSuperset;
+            return true;
         }
 
-        // If the subset isn't an object or array, and doesn't
-        // satisfy the base case, it isn't a superset
         try {
-            if (Object.keys(subset).length === 0) {
-                return !isSuperset;
-            }
+            Object.keys(subset).forEach((key: string) => {
+                isSuperset = isSuperset
+                    && (typeof subset[key] === 'object' && subset[key] !== null
+                        ? Array.isArray(subset[key])
+                            ? sunUtil.isSupersetArray(superset[key], subset[key])
+                            : sunUtil.isSuperset(superset[key], subset[key])
+                        : false);
+            });
         }
-        // If the subset is null or undefined, and doesn't satisfy
-        // the base case, it isn't a superset
-        // TODO: Check if other exceptions could occur
         catch (e) {
-            return !isSuperset;
+            return false;
         }
-
-        // If the children of the subset are subsets of the
-        // respective children of the superset, it is a superset
-        Object.keys(subset).forEach((key: string) => {
-            isSuperset = isSuperset && sunUtil.isSuperset(superset[key], subset[key]);
-        });
         return isSuperset;
+    };
+
+    /**
+     * Returns true if the first array has at least the same
+     * entries as the second array
+     * @param superset - the array to check
+     * @param subset - the array whose entries are required
+     * @returns - true if the first array is a superset of the second
+     */
+    static isSupersetArray (superset: any[], subset: any[]) : boolean {
+        return subset.every((value: any) => superset.includes(value));
     };
 };
 export default sunUtil;

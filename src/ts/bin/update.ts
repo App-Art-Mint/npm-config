@@ -54,7 +54,7 @@ export class sunUpdate {
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
         utilScripts: {
-            endversion: `echo \'\nREMEMBER TO UPDATE THE VERSION IN @sunderapps/config/src/ts/bin/update.ts and publish that too!\n\'`,
+            endversion: `echo '\nREMEMBER TO UPDATE THE VERSION IN @sunderapps/config/src/ts/bin/update.ts and publish that too!\n'`,
         },
         dependencies: {
             '@sunderapps/util': '^0.3.1'

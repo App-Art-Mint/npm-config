@@ -109,7 +109,12 @@ export class sunUpdate {
         bugs: this.oldPackageJson.bugs ?? {},
         main: this.updates.main,
         types: this.updates.types,
-        files: this.updates.files,
+        files: [
+            ...new Set([
+                ...this.oldPackageJson.files,
+                ...this.updates.files
+            ])
+        ],
         directories: this.updates.directories,
         publishConfig: sunUtil.sortObject({
             ...this.oldPackageJson.publishConfig,

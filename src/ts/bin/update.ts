@@ -2,7 +2,6 @@
 
 /**
  * Imports
- * NOTE: Rename file to config.ts
  */
 import cp from 'child_process';
 import fs from 'fs';
@@ -48,14 +47,17 @@ export class sunUpdate {
             }
         },
         scripts: {
+            update: 'npm up -D @sunderapps/config && sunderapps-config',
+            upgrade: 'npm i -D @sunderapps/config && sunderapps-config',
             build: 'webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
-            serve: 'webpack serve --config $npm_package_config_webpack',
-            update: 'npm up -D @sunderapps/config && sunderapps-config',
-            upgrade: 'npm i -D @sunderapps/config && sunderapps-config'
+            serve: 'webpack serve --config $npm_package_config_webpack'
+        },
+        utilScripts: {
+            endversion: 'echo "\nREMEMBER TO UPDATE THE VERSION IN @sunderapps/config/src/ts/bin/update.ts and publish that too!\n"',
         },
         dependencies: {
-            '@sunderapps/util': '^0.3.0'
+            '@sunderapps/util': '^0.3.1'
         },
         ignoreDevDependencies: [
             '@types/glob',

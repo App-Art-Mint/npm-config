@@ -168,7 +168,10 @@ export class sunUpdate {
         let answers: {[key: string]: string} = {},
             settings: any = {};
 
-        //console.log(this.oldPackageJson, this.thisPackageJson, this.newPackageJson);
+        if (this.oldPackageJson.name === '@sunderapps/util') {
+            this.newPackageJson.scripts.endversion = this.updates.utilScripts.endversion;
+        }
+
         if (sunUtil.isSuperset(this.oldPackageJson, this.newPackageJson)) {
             console.log(`\n${sunUtil.utf8.check} Your project is already up-to-date!\n`);
             exit();

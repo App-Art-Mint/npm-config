@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/config",
   "author": "Samuel T Underwood",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "license": "MIT",
   "description": "Config files for the @sunderapps suite of npm libraries",
   "keywords": [
@@ -51,11 +51,10 @@
     }
   },
   "scripts": {
-    "prepare": "npm run package",
+    "prepare": "npm-run-all clean build build:**",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
     "postversion": "git push && git push --tags",
-    "package": "npm-run-all clean build build:**",
     "build": "webpack --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:index": "cross-env BUILD_MODE=index npm run build",

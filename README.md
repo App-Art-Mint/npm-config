@@ -2,57 +2,48 @@
 Config files for the @sunderapps suite of npm libraries
 
 ## Getting Started
-### Install / update this project globallly
+### Install this project as a dev dependency and configure
 ```bash
-npm i -g @sunderapps/config
+npm i -D @sunderapps/config && ./node_modules/.bin/sunderapps-config
 ```
-```bash
-npm up -g @sunderapps/config && sunderapps-config
-```
-or
+
+### Updating (minor/patch updates)
 ```bash
 npm run update
 ```
 
-### Configuring From Scratch
-#### Install dependencies (macOS)
+### Upgrading (major updates)
+```bash
+npm run upgrade
+```
+
+## Full Setup
+### Install dependencies (macOS)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 ```bash
 brew install git gh node
 ```
 
-#### Create a repo on GitHub
-
-#### Change to your code directory
+### Log in to GitHub CLI
 ```bash
-cd path/to/code
+gh auth login
 ```
 
-#### Clone the repo into its own folder
+### Change to your code directory
 ```bash
-gh repo clone [user]/[repo]
+cd [path/to/code]
 ```
 
-#### Initialize npm and follow the prompts
+### Create and enter a project directory
 ```bash
-npm init
+mkdir [project] && cd [project]
 ```
 
-#### Update your configuration and follow the prompts
-##### This command requires global installation (see above)
+### Create a GitHub repo (still need to make template and test this)
 ```bash
-sunderapps-config
-```
-
-### Configuring an existing project
-#### Change to your project directory
-```bash
-cd path/to/code/[project]
-```
-
-#### Update your configuration and follow the prompts
-##### This command requires global installation (see above)
-```bash
-sunderapps-config
+gh repo create [project] -c -d '[description]' -p Sunder-Apps/template --public
 ```
 
 ## Usage
@@ -85,10 +76,10 @@ To remove all build files, run:
 npm run clean
 ```
 
-#### Packaging
+#### Preparing
 To build all of your source files, run:
 ```bash
-npm run package
+npm run prepare
 ```
 This will run automatically after dependencies are installed (`npm i`) and before the package is distributed (`npm version [args]`).
 
@@ -98,22 +89,28 @@ To update the version of the package, commit changes to git, and publish the cha
 npm version [major|minor|patch] --force -m "%s - [commit message]"
 ```
 
-### Updating
-#### To update the configuration, run:
-```bash
-npm run update
-```
-
 ## Configuration (edit your package.json to change these)
 ### Defaults:
 ```json
 "config": {
-  "prefix": "sun",      // The library prefix of the project
-  "library": "sun",     // The name of the library
-  "port": "42069",      // The port to run the dev server on
-  "index": "index",     // The name of the main bundle file
-  "webpack": "...",     // DO NOT EDIT
-  "exts": {             // File extensions
+  "prefix": "sun",        // The library prefix of the project
+  "library": "sun",       // The name of the library
+  "port": "42069",        // The port to run the dev server on
+  "index": "index",       // The name of the main bundle file
+  "webpack": "...",       // DO NOT EDIT
+  "dirs": {
+    "doc": "docs",        // Required for npm scripts
+    "test": "test",
+    "src": "src",         // Required for npm scripts
+    "config": "config",
+    "imports": "imports",
+    "scss": "scss",       // Required for npm scripts
+    "ts": "ts",
+    "dist": "dist",       // Required for npm scripts
+    "css": "css",
+    "js": "js"
+  },
+  "exts": {               // File extensions
     "html": ".html",
     "scss": ".scss",
     "ts": ".ts",
@@ -124,23 +121,4 @@ npm run update
     "chunk": ".chunk"
   }
 },
-```
-
-## Overwrite directory locations in your package.json
-### Some of these are required for the npm scripts to function
-```json
-"config": {
-  "dirs": {
-    "doc": "docs",        // Required for npm
-    "test": "test",
-    "src": "src",         // Required for npm
-    "config": "config",
-    "imports": "imports",
-    "scss": "scss",       // Required for npm
-    "ts": "ts",
-    "dist": "dist",       // Required for npm
-    "css": "css",
-    "js": "js"
-  }
-}
 ```

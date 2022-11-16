@@ -7,7 +7,7 @@ Config files for the @sunderapps suite of npm libraries
 npm i -g @sunderapps/config
 ```
 ```bash
-npm up -g @sunderapps/config && sun-config
+npm up -g @sunderapps/config && sunderapps-config
 ```
 or
 ```bash

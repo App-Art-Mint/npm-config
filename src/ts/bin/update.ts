@@ -50,9 +50,7 @@ export class sunUpdate {
             build: 'webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'webpack serve --config $npm_package_config_webpack',
-            update: 'npm r -D @sunderapps/config && npm i -D @sunderapps/config && sunderapps-config',
-            'update:config': 'npm up -D @sunderapps/config',
-            'update:util': 'npm up @sunderapps/util',
+            update: 'npm i -g @sunderapps/config@latest && sunderapps-config'
         },
         dependencies: {
             '@sunderapps/util': '^0.2.0'
@@ -161,12 +159,12 @@ export class sunUpdate {
         let answers: {[key: string]: string} = {},
             settings: any = {};
 
-        if (JSON.stringify(this.oldPackageJson) === JSON.stringify(this.newPackageJson)) {
+        if (sunUtil.isSuperset(this.oldPackageJson, this.newPackageJson)) {
             console.log(`\n${sunUtil.utf8.check} Your project is already up-to-date!\n`);
             exit();
         }
 
-        console.log('\nRunning update 🏃\n',
+        console.log(`\nRunning update ${sunUtil.utf8.run}\n`,
                     `\n${sunUtil.utf8.new} Here is your updated package.json:\n`,
                     this.newPackageJson,
                     '\n\n');

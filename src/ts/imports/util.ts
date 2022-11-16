@@ -48,5 +48,43 @@ export abstract class sunUtil {
             return obj;
         }, {});
     };
+
+    /**
+     * Returns true if the first object has at least the same
+     * entries as the second object
+     * @param superset - the object to check
+     * @param subset - the object whose entries are required
+     * @returns - true if the first object is a superset of the second
+     * @recursive
+     */
+     static isSuperset (superset: any, subset: any) : boolean {
+        let isSuperset: boolean = true;
+        
+        // Base case - if the objects are equal, it is a superset
+        if (superset === subset) {
+            return isSuperset;
+        }
+
+        // If the subset isn't an object or array, and doesn't
+        // satisfy the base case, it isn't a superset
+        try {
+            if (Object.keys(subset).length === 0) {
+                return !isSuperset;
+            }
+        }
+        // If the subset is null or undefined, and doesn't satisfy
+        // the base case, it isn't a superset
+        // TODO: Check if other exceptions could occur
+        catch (e) {
+            return !isSuperset;
+        }
+
+        // If the children of the subset are subsets of the
+        // respective children of the superset, it is a superset
+        Object.keys(subset).forEach((key: string) => {
+            isSuperset = isSuperset && sunUtil.isSuperset(superset[key], subset[key]);
+        });
+        return isSuperset;
+    };
 };
 export default sunUtil;

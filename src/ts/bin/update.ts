@@ -55,7 +55,7 @@ export class sunUpdate {
             upgrade: 'npm i -D @sunderapps/config && sunderapps-config'
         },
         dependencies: {
-            '@sunderapps/util': '^0.2.0'
+            '@sunderapps/util': '^0.3.0'
         },
         ignoreDevDependencies: [
             '@types/glob',
@@ -137,6 +137,7 @@ export class sunUpdate {
             'build:config:prod': this.newScripts['build:config:prod'],
             'build:tsdoc': this.newScripts['build:tsdoc'],
             'build:sassdoc': this.newScripts['build:sassdoc'],
+            serve: this.newScripts.serve,
             watch: this.newScripts.watch,
             'watch:prod': this.newScripts['watch:prod'],
             'watch:tsdoc': this.newScripts['watch:tsdoc'],
@@ -145,7 +146,10 @@ export class sunUpdate {
         },
         dependencies: sunUtil.sortObject({
             ...this.oldPackageJson.dependencies,
-            ...this.updates.dependencies
+            ...sunUtil.removeObjectEntries(
+                this.updates.dependencies,
+                [this.oldPackageJson.name]
+            )
         }),
         devDependencies: sunUtil.sortObject({
             ...this.oldPackageJson.devDependencies,

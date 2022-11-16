@@ -2,7 +2,7 @@
  * Imports
  */
 import webpack from 'webpack';
-import sunConfig from './config';
+import sunConfig from '../config';
 
 /**
  * Webpack Index Configuration

@@ -4,7 +4,12 @@ Config files for the @sunderapps suite of npm libraries
 ## Getting Started
 ### Install this project as a dev dependency and configure
 ```bash
-npm i -D @sunderapps/config && ./node_modules/.bin/sunderapps-config
+npm i -D @sunderapps/config \
+&& ./node_modules/.bin/sunderapps-config
+```
+```powershell
+npm i -D @sunderapps/config; `
+./node_modules/.bin/sunderapps-config
 ```
 
 ### Updating (minor/patch updates)
@@ -18,32 +23,51 @@ npm run upgrade
 ```
 
 ## Full Setup
-### Install dependencies (macOS)
+### Install dependencies
+#### macOS X+
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-```bash
-brew install git gh node
+brew install git gh node \
+&& brew install --cask visual-studio-code
 ```
 
-### Log in to GitHub CLI
+#### Windows 10+
+```powershell
+winget install git.git; `
+winget install github.cli; `
+winget install openjs.nodejs.lts; `
+winget install microsoft.visualstudiocode
+```
+
+#### Linux
+##### Arch
+```bash
+sudo pacman -Sy git github-cli nodejs-lts-gallium code
+```
+
+### Set your git identity
+```bash
+git config --global user.email '[email]' \
+&& git config --global user.name '[name]'
+```
+
+### Log in to GitHub CLI and follow the prompts
 ```bash
 gh auth login
 ```
 
-### Change to your code directory
+### Log in to npm and follow the prompts
 ```bash
-cd [path/to/code]
+npm adduser
 ```
 
 ### Create and enter a project directory
 ```bash
-mkdir [project] && cd [project]
+cd [path/to/code] && mkdir [project] && cd [project]
 ```
 
 ### Create a GitHub repo (still need to make template and test this)
 ```bash
-gh repo create [project] -c -d '[description]' -p Sunder-Apps/template --public
+gh repo create [project] -c -d '[description]' -p Sunder-Apps/template --public && npm i
 ```
 
 ## Usage

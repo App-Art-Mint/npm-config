@@ -11,10 +11,10 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 import sunConfig from '../imports/config';
 import { sunTSEntries, sunIndexEntries,
          sunNodeEntries, sunSCSSEntries } from '../imports/entries';
-import sunBabelConfig from '../imports/babel.config';
-import sunServerConfig from '../imports/server.config';
-import sunIndexConfig from '../imports/webpack.index';
-import sunNodeConfig from '../imports/node.config';
+import sunBabelConfig from '../imports/config/babel.config';
+import sunServerConfig from '../imports/config/server.config';
+import sunIndexConfig from '../imports/config/webpack.index';
+import sunNodeConfig from '../imports/config/node.config';
 
 /**
  * Webpack Configuration

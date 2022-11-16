@@ -2,7 +2,7 @@
  * Imports
  */
 import devServer from 'webpack-dev-server';
-import sunConfig from './config';
+import sunConfig from '../config';
 
 /**
  * Development Server Configuration

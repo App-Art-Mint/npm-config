@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/config",
   "author": "Samuel T Underwood",
-  "version": "0.3.16",
+  "version": "0.3.19",
   "license": "MIT",
   "description": "Config files for the @sunderapps suite of npm libraries",
   "keywords": [

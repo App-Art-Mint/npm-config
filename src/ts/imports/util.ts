@@ -1,11 +1,17 @@
-import { exit } from "process";
+/**
+ * Imports
+ */
+//import { exit } from "process";
 
 /**
  * Util functions for the config library
+ * @note - make sure to update @sunderapps/util if you update this file (if needed)
+ *       - then update the version in update.ts
  */
 export abstract class sunUtil {
     /**
      * Emojis
+     * @note - add this to its own @sunderapps/util class
      */
     static utf8: {[key: string]: string} = {
         alert: '🚨',

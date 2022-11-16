@@ -8,6 +8,7 @@ import path from 'path';
  */
 export const sunPrefix: string = process.env.npm_package_config_prefix ?? 'sun';
 export const sunProd: boolean = process.env.NODE_ENV?.toLowerCase() === 'production';
+console.log(sunPrefix, sunProd, process.env.NODE_ENV, process.env.BUILD_MODE);
 
 export const sunDirs: {[key: string]: string} = {
     src: process.env.npm_package_config_dirs_src ?? 'src',

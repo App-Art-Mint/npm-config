@@ -61,7 +61,9 @@ export abstract class sunUtil {
      */
      static isSuperset (superset: any, subset: any) : boolean {
         console.log(superset, '\n\n\n', subset);
-        exit();
+        if (superset === 'f' || superset === 's') {
+            exit();
+        }
         let isSuperset: boolean = true;
         
         // Base case - if the objects are equal, it is a superset

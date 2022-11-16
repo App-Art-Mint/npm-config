@@ -2,6 +2,7 @@
 
 /**
  * Imports
+ * NOTE: Rename file to config.ts
  */
 import cp from 'child_process';
 import fs from 'fs';

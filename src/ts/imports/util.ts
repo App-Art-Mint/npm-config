@@ -58,6 +58,7 @@ export abstract class sunUtil {
      * @recursive
      */
      static isSuperset (superset: any, subset: any) : boolean {
+        console.log(superset, '\n\n\n', subset);
         let isSuperset: boolean = true;
         
         // Base case - if the objects are equal, it is a superset

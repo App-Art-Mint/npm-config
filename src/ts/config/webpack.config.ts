@@ -104,4 +104,4 @@ export const sunActiveConfig: webpack.Configuration =
     }
     : sunWebpackConfig;
 export default sunActiveConfig;
-console.log(sunConfig);
+console.log(sunConfig, process.env.NODE_ENV, process.env.BUILD_MODE);

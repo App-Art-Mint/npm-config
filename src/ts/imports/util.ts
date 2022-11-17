@@ -98,5 +98,59 @@ export abstract class sunUtil {
     static isSupersetArray (superset: any[], subset: any[]) : boolean {
         return subset.every((value: any) => superset.includes(value));
     };
+
+    /**
+     * Removes any entries with falsey values (configurable)
+     * @todo - make this configurable
+     * @todo - make this recursive
+     */
+    static removeBadValues (object: any, options: {[key: string]: boolean}) : Object {
+        const badValues: {[key: string]: boolean} = {
+            null: true,
+            undefined: true,
+            empty: true,
+            func: true,
+            false: false
+        };
+        return Object.keys(object).reduce((obj: any, key: string) => {
+            switch (object[key]) {
+                case null:
+                    if (badValues.null) {
+                        break;
+                    }
+                case undefined:
+                    if (badValues.undefined) {
+                        break;
+                    }
+                case false:
+                    if (badValues.false) {
+                        break;
+                    }
+                default:
+                    switch (typeof object[key]) {
+                        case 'function':
+                            if (badValues.func) {
+                                break;
+                            }
+                        case 'object':
+                            if (badValues.empty && !Object.keys(object[key]).length) {
+                                break;
+                            }
+                        default:
+                            obj[key] = object[key];
+                    }
+            }
+
+            return obj;
+        }, {});
+    };
+
+    /**
+     * Returns the difference between two objects
+     * @todo - write this
+     */
+    static objectDiff (object: any, base: any) : Object {
+        return {};
+    };
 };
 export default sunUtil;

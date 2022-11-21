@@ -147,14 +147,16 @@ export abstract class sunExts {
      * The CSS extension
      */
     static get css (): string {
-        return process.env.npm_package_config_exts_css ?? '.css';
+        console.log(sunConfig.prod, (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_css ?? '.css'));
+        return (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_css ?? '.css');
     };
 
     /**
      * The JavaScript extension
      */
     static get js (): string {
-        return process.env.npm_package_config_exts_js ?? '.js';
+        console.log(sunConfig.prod, (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_js ?? '.js'));
+        return (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_js ?? '.js');
     };
 
     /**

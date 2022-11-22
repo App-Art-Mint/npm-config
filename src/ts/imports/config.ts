@@ -2,6 +2,7 @@
  * Imports
  */
 import path from 'path';
+import process from 'process';
 
 /**
  * Directories Class

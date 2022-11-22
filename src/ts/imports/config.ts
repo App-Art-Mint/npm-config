@@ -249,4 +249,4 @@ export abstract class sunConfig {
     };
 };
  export default sunConfig;
-console.log(sunConfig.prod, sunConfig.exts.js, sunConfig.mode);
+ 

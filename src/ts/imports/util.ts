@@ -1,7 +1,6 @@
 /**
  * Imports
  */
-//import { exit } from "process";
 
 /**
  * Util functions for the config library

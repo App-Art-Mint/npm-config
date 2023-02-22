@@ -54,7 +54,7 @@ export class sunUpdate {
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            '@sunderapps/util': '^0.5.0'
+            '@sunderapps/util': '^0.6.2'
         },
         ignoreDevDependencies: [
             '@types/glob',

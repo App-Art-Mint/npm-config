@@ -2,20 +2,20 @@
  * Imports
  */
 import webpack from 'webpack';
-import sunConfig from '../config';
+import mintConfig from '../config';
 
 /**
  * Webpack Index Configuration
  */
-export const sunIndexConfig: webpack.Configuration = {
+export const mintIndexConfig: webpack.Configuration = {
     output: {
-        filename: `${sunConfig.dirs.js}/[lc-name]${sunConfig.exts.js}`,
-        chunkFilename: `${sunConfig.dirs.js}/[lc-name].[chunkhash]${sunConfig.exts.chunk}${sunConfig.exts.js}`,
-        path: sunConfig.paths.dist,
+        filename: `${mintConfig.dirs.js}/[lc-name]${mintConfig.exts.js}`,
+        chunkFilename: `${mintConfig.dirs.js}/[lc-name].[chunkhash]${mintConfig.exts.chunk}${mintConfig.exts.js}`,
+        path: mintConfig.paths.dist,
         library: {
-            name: sunConfig.library,
+            name: mintConfig.library,
             type: 'umd'
         }
     }
 };
-export default sunIndexConfig;
+export default mintIndexConfig;

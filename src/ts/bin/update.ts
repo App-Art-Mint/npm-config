@@ -11,17 +11,16 @@ import ps from 'prompt-sync';
 import sunUtil from '../imports/util';
 
 /**
- * Update / setup for the @sunderapps npm library suite
+ * Update / setup for the @appartmint npm library suite
  */
-export class sunUpdate {
+export class mintUpdate {
     /**
      * Values to add to the package.json
      */
     private updates: any = {
         keywords: [
-            'sunderapps',
-            'sunder-apps',
-            'sunder'
+            'appartmint',
+            'app-art-mint'
         ],
         main: 'dist/js/index.min.js',
         types: 'dist/js/index.d.ts',
@@ -38,7 +37,7 @@ export class sunUpdate {
             access: 'public'
         },
         config: {
-            webpack: 'node_modules/@sunderapps/config/dist/js/webpack.config.min.js',
+            webpack: 'node_modules/@appartmint/config/dist/js/webpack.config.min.js',
             dirs: {
                 doc: 'docs',
                 src: 'src',
@@ -47,8 +46,8 @@ export class sunUpdate {
             }
         },
         scripts: {
-            update: 'npm up -D @sunderapps/config && sunderapps-config',
-            upgrade: 'npm i -D @sunderapps/config && sunderapps-config',
+            update: 'npm up -D @appartmint/config && mint-config',
+            upgrade: 'npm i -D @appartmint/config && mint-config',
             build: 'webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'webpack serve --config $npm_package_config_webpack'
@@ -72,7 +71,7 @@ export class sunUpdate {
      * The package.json object for this project
      * TODO: maybe unsync these?
      */
-    private thisPackageJson: any = JSON.parse(fs.readFileSync(path.resolve('node_modules/@sunderapps/config/package.json'), 'utf8'));
+    private thisPackageJson: any = JSON.parse(fs.readFileSync(path.resolve('node_modules/@appartmint/config/package.json'), 'utf8'));
 
     /**
      * The original package.json object for the current project
@@ -94,7 +93,7 @@ export class sunUpdate {
      */
     private newPackageJson: any = {
         name: this.oldPackageJson.name,
-        author: this.oldPackageJson.author ?? 'Samuel T Underwood',
+        author: this.oldPackageJson.author ?? 'App/Art Mint',
         version: this.oldPackageJson.version ?? '0.0.1',
         license: this.oldPackageJson.license ?? 'MIT',
         description: this.oldPackageJson.description ?? '',
@@ -104,7 +103,7 @@ export class sunUpdate {
                 ...this.oldPackageJson.keywords.sort()
             ])
         ],
-        homepage: this.oldPackageJson.homepage ?? 'https://www.sunderapps.com',
+        homepage: this.oldPackageJson.homepage ?? 'https://www.appartmint.com',
         repository: this.oldPackageJson.repository ?? {},
         bugs: this.oldPackageJson.bugs ?? {},
         main: this.updates.main,
@@ -161,7 +160,7 @@ export class sunUpdate {
                 this.thisPackageJson.devDependencies,
                 this.updates.ignoreDevDependencies
             ),
-            '@sunderapps/config': `^${this.thisPackageJson.version}`
+            '@appartmint/config': `^${this.thisPackageJson.version}`
         })
     };
 
@@ -206,5 +205,5 @@ export class sunUpdate {
         });
     };
 };
-export default sunUpdate;
-new sunUpdate();
+export default mintUpdate;
+new mintUpdate();

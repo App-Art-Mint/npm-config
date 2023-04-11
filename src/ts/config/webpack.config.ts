@@ -8,30 +8,30 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 const ShebangPlugin = require('webpack-shebang-plugin');
 const LowerCaseNamePlugin = require('webpack-lowercase-name');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
-import sunConfig from '../imports/config';
-import { sunTSEntries, sunIndexEntries,
-         sunNodeEntries, sunSCSSEntries } from '../imports/entries';
-import sunBabelConfig from '../imports/config/babel.config';
-import sunServerConfig from '../imports/config/server.config';
-import sunIndexConfig from '../imports/config/webpack.index';
-import sunNodeConfig from '../imports/config/node.config';
+import mintConfig from '../imports/config';
+import { mintTSEntries, mintIndexEntries,
+         mintNodeEntries, mintSCSSEntries } from '../imports/entries';
+import mintBabelConfig from '../imports/config/babel.config';
+import mintServerConfig from '../imports/config/server.config';
+import mintIndexConfig from '../imports/config/webpack.index';
+import mintNodeConfig from '../imports/config/node.config';
 
 /**
  * Webpack Configuration
  */
-export const sunWebpackConfig: webpack.Configuration = {
-    mode: sunConfig.prod ? 'production' : 'development',
+export const mintWebpackConfig: webpack.Configuration = {
+    mode: mintConfig.prod ? 'production' : 'development',
     devtool: 'source-map',
     entry: {
-        ...sunSCSSEntries,
-        ...sunTSEntries
+        ...mintSCSSEntries,
+        ...mintTSEntries
     },
     output: {
-        filename: `${sunConfig.dirs.js}/[lc-name]${sunConfig.exts.js}`,
-        chunkFilename: `${sunConfig.dirs.js}/[lc-name].[chunkhash]${sunConfig.exts.chunk}${sunConfig.exts.js}`,
-        path: sunConfig.paths.dist,
+        filename: `${mintConfig.dirs.js}/[lc-name]${mintConfig.exts.js}`,
+        chunkFilename: `${mintConfig.dirs.js}/[lc-name].[chunkhash]${mintConfig.exts.chunk}${mintConfig.exts.js}`,
+        path: mintConfig.paths.dist,
         library: {
-            name: `${sunConfig.prefix}[name]`,
+            name: `${mintConfig.prefix}[name]`,
             type: 'umd',
             export: 'default'
         },
@@ -45,7 +45,7 @@ export const sunWebpackConfig: webpack.Configuration = {
                 use: [
                     {
                         loader: 'babel-loader',
-                        options: sunBabelConfig
+                        options: mintBabelConfig
                     },
                     {
                         loader: 'ts-loader',
@@ -70,13 +70,13 @@ export const sunWebpackConfig: webpack.Configuration = {
     plugins: [
         /*new CopyWebpackPlugin({
             patterns: [
-                `${sunConfig.paths.src}/index${sunConfig.exts.html}`
+                `${mintConfig.paths.src}/index${mintConfig.exts.html}`
             ]
         }),*/
         new LowerCaseNamePlugin(),
         new MiniCssExtractPlugin({
-            filename: `${sunConfig.dirs.css}/[lc-name]${sunConfig.exts.css}`,
-            chunkFilename: `${sunConfig.dirs.css}/[lc-name].[chunkhash]${sunConfig.exts.chunk}${sunConfig.exts.css}`
+            filename: `${mintConfig.dirs.css}/[lc-name]${mintConfig.exts.css}`,
+            chunkFilename: `${mintConfig.dirs.css}/[lc-name].[chunkhash]${mintConfig.exts.chunk}${mintConfig.exts.css}`
         }),
         new RemoveEmptyScriptsPlugin(),
         new ShebangPlugin()
@@ -84,23 +84,23 @@ export const sunWebpackConfig: webpack.Configuration = {
     resolve: {
         extensions: ['.ts', '.tsx'],
     },
-    devServer: sunServerConfig
+    devServer: mintServerConfig
 };
 
 /**
  * Active Configuration
  * Built using env variables NODE_ENV and BUILD_MODE
  */
-export const sunActiveConfig: webpack.Configuration = 
-    sunConfig.mode === 'index' ? { 
-        ...sunWebpackConfig,
-        ...sunIndexConfig,
-        entry: sunIndexEntries
+export const mintActiveConfig: webpack.Configuration = 
+    mintConfig.mode === 'index' ? { 
+        ...mintWebpackConfig,
+        ...mintIndexConfig,
+        entry: mintIndexEntries
     }
-    : sunConfig.mode === 'config' ? {
-        ...sunWebpackConfig,
-        ...sunNodeConfig,
-        entry: sunNodeEntries
+    : mintConfig.mode === 'config' ? {
+        ...mintWebpackConfig,
+        ...mintNodeConfig,
+        entry: mintNodeEntries
     }
-    : sunWebpackConfig;
-export default sunActiveConfig;
+    : mintWebpackConfig;
+export default mintActiveConfig;

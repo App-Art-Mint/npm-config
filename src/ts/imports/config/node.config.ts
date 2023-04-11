@@ -7,7 +7,7 @@ import NodeExternals from 'webpack-node-externals';
 /**
  * Webpack Node Configuration
  */
-export const sunNodeConfig: webpack.Configuration = {
+export const mintNodeConfig: webpack.Configuration = {
     target: 'node',
     externals: [
         NodeExternals()
@@ -16,4 +16,4 @@ export const sunNodeConfig: webpack.Configuration = {
         node: true
     },
 };
-export default sunNodeConfig;
+export default mintNodeConfig;

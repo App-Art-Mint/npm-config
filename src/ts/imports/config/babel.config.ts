@@ -1,7 +1,7 @@
 /**
  * Babel Configuration
  */
-export const sunBabelConfig: any = {
+export const mintBabelConfig: any = {
     presets: [
         [
             '@babel/preset-env',
@@ -11,4 +11,4 @@ export const sunBabelConfig: any = {
         ]
     ]
 };
-export default sunBabelConfig;
+export default mintBabelConfig;

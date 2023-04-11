@@ -4,7 +4,7 @@
 import path from 'path';
 import glob from 'glob';
 import { exit } from 'process';
-import sunConfig from './config';
+import mintConfig from './config';
 
 /**
  * Flag for duplicate entries
@@ -18,7 +18,7 @@ import sunConfig from './config';
  * @param upper - whether to capitalize the entry key or not
  * @returns - the updated collection of entries
  */
-export function sunAddEntry (entries: {[key: string]: string}, 
+export function mintAddEntry (entries: {[key: string]: string}, 
                              file: string,
                              upper?: boolean)
                              : {[key: string]: string} {
@@ -40,30 +40,30 @@ export function sunAddEntry (entries: {[key: string]: string},
 /**
  * Typescript Entries
  */
-export const sunTSEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.ts}/{!(${sunConfig.index})${sunConfig.exts.ts},!(${sunConfig.dirs.bin}|${sunConfig.dirs.config}|${sunConfig.dirs.imports})/**/*${sunConfig.exts.ts}}`)
-    .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
+export const mintTSEntries: {[key: string]: string} =
+    glob.sync(`${mintConfig.paths.ts}/{!(${mintConfig.index})${mintConfig.exts.ts},!(${mintConfig.dirs.bin}|${mintConfig.dirs.config}|${mintConfig.dirs.imports})/**/*${mintConfig.exts.ts}}`)
+    .reduce((entries: {[key: string]: string}, file: string) => mintAddEntry(entries, file, true), {});
 
 /**
  * Index Entries
  */
-export const sunIndexEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.ts}/${sunConfig.index}${sunConfig.exts.ts}`)
-    .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
+export const mintIndexEntries: {[key: string]: string} =
+    glob.sync(`${mintConfig.paths.ts}/${mintConfig.index}${mintConfig.exts.ts}`)
+    .reduce((entries: {[key: string]: string}, file: string) => mintAddEntry(entries, file, true), {});
 
 /**
  * Node Entries
  */
-export const sunNodeEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.ts}/{${sunConfig.dirs.bin},${sunConfig.dirs.config}}/**/*${sunConfig.exts.ts}`)
-    .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file, true), {});
+export const mintNodeEntries: {[key: string]: string} =
+    glob.sync(`${mintConfig.paths.ts}/{${mintConfig.dirs.bin},${mintConfig.dirs.config}}/**/*${mintConfig.exts.ts}`)
+    .reduce((entries: {[key: string]: string}, file: string) => mintAddEntry(entries, file, true), {});
 
 /**
  * Scss Entries
  */
-export const sunSCSSEntries: {[key: string]: string} =
-    glob.sync(`${sunConfig.paths.scss}/{*${sunConfig.exts.scss},!(${sunConfig.dirs.imports})/**/*${sunConfig.exts.scss}}`)
-    .reduce((entries: {[key: string]: string}, file: string) => sunAddEntry(entries, file), {});
+export const mintSCSSEntries: {[key: string]: string} =
+    glob.sync(`${mintConfig.paths.scss}/{*${mintConfig.exts.scss},!(${mintConfig.dirs.imports})/**/*${mintConfig.exts.scss}}`)
+    .reduce((entries: {[key: string]: string}, file: string) => mintAddEntry(entries, file), {});
 
 /**
  * Exit if there were conflicts in the entries

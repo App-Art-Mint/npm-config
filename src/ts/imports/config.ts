@@ -7,7 +7,7 @@ import process from 'process';
 /**
  * Directories Class
  */
-export abstract class sunDirs {
+export abstract class mintDirs {
     /**
      * The source directory
      */
@@ -75,54 +75,54 @@ export abstract class sunDirs {
 /**
  * Paths Class
  */
-export abstract class sunPaths {
+export abstract class mintPaths {
     /**
      * The source path
      */
     static get src (): string {
-        return path.resolve(sunDirs.src);
+        return path.resolve(mintDirs.src);
     };
 
     /**
      * The SCSS path
      */
     static get scss (): string {
-        return path.resolve(sunDirs.src, sunDirs.scss);
+        return path.resolve(mintDirs.src, mintDirs.scss);
     };
 
     /**
      * The TypeScript path
      */
     static get ts (): string {
-        return path.resolve(sunDirs.src, sunDirs.ts);
+        return path.resolve(mintDirs.src, mintDirs.ts);
     };
 
     /**
      * The distribution path
      */
     static get dist (): string {
-        return path.resolve(sunDirs.dist);
+        return path.resolve(mintDirs.dist);
     };
 
     /**
      * The CSS path
      */
     static get css (): string {
-        return path.resolve(sunDirs.dist, sunDirs.css);
+        return path.resolve(mintDirs.dist, mintDirs.css);
     };
 
     /**
      * The JavaScript path
      */
     static get js (): string {
-        return path.resolve(sunDirs.dist, sunDirs.js);
+        return path.resolve(mintDirs.dist, mintDirs.js);
     };
 };
 
 /**
  * Extensions Class
  */
-export abstract class sunExts {
+export abstract class mintExts {
     /**
      * The HTML extension
      */
@@ -148,14 +148,14 @@ export abstract class sunExts {
      * The CSS extension
      */
     static get css (): string {
-        return (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_css ?? '.css');
+        return (mintConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_css ?? '.css');
     };
 
     /**
      * The JavaScript extension
      */
     static get js (): string {
-        return (sunConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_js ?? '.js');
+        return (mintConfig.prod ? '.min' : '') + (process.env.npm_package_config_exts_js ?? '.js');
     };
 
     /**
@@ -183,12 +183,12 @@ export abstract class sunExts {
 /**
  * Configuration Class
  */
-export abstract class sunConfig {
+export abstract class mintConfig {
     /**
      * The prefix of the library
      */
     static get prefix (): string {
-        return process.env.npm_package_config_prefix ?? 'sun';
+        return process.env.npm_package_config_prefix ?? 'mint';
     };
 
     /**
@@ -196,7 +196,7 @@ export abstract class sunConfig {
      * @default - the prefix of the library
      */
     static get library (): string {
-        return process.env.npm_package_config_library ?? sunConfig.prefix;
+        return process.env.npm_package_config_library ?? mintConfig.prefix;
     };
  
     /**
@@ -230,23 +230,23 @@ export abstract class sunConfig {
     /**
      * The configured directories
      */
-    static get dirs (): typeof sunDirs {
-        return sunDirs;
+    static get dirs (): typeof mintDirs {
+        return mintDirs;
     };
  
     /**
      * The configured paths
      */
-    static get paths (): typeof sunPaths {
-        return sunPaths;
+    static get paths (): typeof mintPaths {
+        return mintPaths;
     };
  
      /**
       * The configured extensions
       */
-     static get exts (): typeof sunExts {
-        return sunExts;
+     static get exts (): typeof mintExts {
+        return mintExts;
     };
 };
- export default sunConfig;
+ export default mintConfig;
  

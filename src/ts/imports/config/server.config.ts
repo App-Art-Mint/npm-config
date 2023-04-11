@@ -2,16 +2,16 @@
  * Imports
  */
 import devServer from 'webpack-dev-server';
-import sunConfig from '../config';
+import mintConfig from '../config';
 
 /**
  * Development Server Configuration
  */
-export const sunServerConfig: devServer.Configuration = {
+export const mintServerConfig: devServer.Configuration = {
     static: {
-        directory: sunConfig.paths.dist,
+        directory: mintConfig.paths.dist,
     },
     compress: true,
-    port: sunConfig.port
+    port: mintConfig.port
 };
-export default sunServerConfig;
+export default mintServerConfig;

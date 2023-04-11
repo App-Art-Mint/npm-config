@@ -4,13 +4,13 @@
 
 /**
  * Util functions for the config library
- * @note - make sure to update @sunderapps/util if you update this file (if needed)
+ * @note - make sure to update @appartmint/util if you update this file (if needed)
  *       - then update the version in update.ts
  */
-export abstract class sunUtil {
+export abstract class mintUtil {
     /**
      * Emojis
-     * @note - add this to its own @sunderapps/util class
+     * @note - add this to its own @appartmint/util class
      */
     static utf8: {[key: string]: string} = {
         alert: '🚨',
@@ -76,8 +76,8 @@ export abstract class sunUtil {
                 isSuperset = isSuperset
                     && (typeof subset[key] === 'object' && subset[key] !== null
                         ? Array.isArray(subset[key])
-                            ? sunUtil.isSupersetArray(superset[key], subset[key])
-                            : sunUtil.isSuperset(superset[key], subset[key])
+                            ? mintUtil.isSupersetArray(superset[key], subset[key])
+                            : mintUtil.isSuperset(superset[key], subset[key])
                         : false);
             });
         }
@@ -152,4 +152,4 @@ export abstract class sunUtil {
         return {};
     };
 };
-export default sunUtil;
+export default mintUtil;

@@ -1,15 +1,15 @@
-# @sunderapps/config
-Config files for the @sunderapps suite of npm libraries
+# @appartmint/config
+Config files for the @appartmint suite of npm libraries
 
 ## Getting Started
 ### Install this project as a dev dependency and configure
 ```bash
-npm i -D @sunderapps/config \
-&& ./node_modules/.bin/sunderapps-config
+npm i -D @appartmint/config \
+&& ./node_modules/.bin/aam-config
 ```
 ```powershell
-npm i -D @sunderapps/config; `
-./node_modules/.bin/sunderapps-config
+npm i -D @appartmint/config; `
+./node_modules/.bin/aam-config
 ```
 
 ### Updating (minor/patch updates)
@@ -117,8 +117,8 @@ npm version [major|minor|patch] --force -m "%s - [commit message]"
 ### Defaults:
 ```json
 "config": {
-  "prefix": "sun",        // The library prefix of the project
-  "library": "sun",       // The name of the library
+  "prefix": "mint",       // The library prefix of the project
+  "library": "mint",      // The name of the library
   "port": "42069",        // The port to run the dev server on
   "index": "index",       // The name of the main bundle file
   "webpack": "...",       // DO NOT EDIT

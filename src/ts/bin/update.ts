@@ -52,8 +52,7 @@ export class mintUpdate {
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            // Don't add this if the project is util
-            '@sunderapps/util': '^0.7.0'
+            '@appartmint/util': '^0.7.0'
         },
         ignoreDevDependencies: [
             '@types/glob',

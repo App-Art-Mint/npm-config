@@ -47,13 +47,13 @@ export class mintUpdate {
         },
         scripts: {
             update: 'npm up -D @appartmint/config && mint-config',
-            upgrade: 'npm i -D @appartmint/config && mint-config',
             build: 'webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            '@sunderapps/util': '^0.6.2'
+            // Don't add this if the project is util
+            '@sunderapps/util': '^0.7.0'
         },
         ignoreDevDependencies: [
             '@types/glob',

@@ -5,11 +5,11 @@ Config files for the @appartmint suite of npm libraries
 ### Install this project as a dev dependency and configure
 ```bash
 npm i -D @appartmint/config \
-&& ./node_modules/.bin/aam-config
+&& ./node_modules/.bin/mint-config
 ```
 ```powershell
 npm i -D @appartmint/config; `
-./node_modules/.bin/aam-config
+./node_modules/.bin/mint-config
 ```
 
 ### Updating (minor/patch updates)

@@ -1,7 +1,7 @@
 {
   "name": "@appartmint/config",
   "author": "App/Art Mint",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "license": "MIT",
   "description": "Config files for the @appartmint suite of npm libraries",
   "keywords": [

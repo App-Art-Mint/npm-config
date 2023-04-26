@@ -52,7 +52,7 @@ export class mintUpdate {
             serve: 'webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            '@appartmint/util': '^0.7.1'
+            '@appartmint/util': '^0.7.5'
         },
         ignoreDevDependencies: [
             '@types/glob',

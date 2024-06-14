@@ -50,11 +50,12 @@
     }
   },
   "scripts": {
-    "prepare": "npm-run-all clean build build:**",
+    "prepare": "npm-run-all clean bundle",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
     "postversion": "git push && git push --tags && npm run endversion --if-present",
-    "build": "webpack --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
+    "bundle": "npm-run-all build build:**",
+    "build": "cross-var webpack --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:index": "cross-env BUILD_MODE=index npm run build",
     "build:index:prod": "cross-env NODE_ENV=production BUILD_MODE=index npm run build",
@@ -64,9 +65,9 @@
     "watch": "npm run build -- --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
     "watch:tsdoc": "npm run build:tsdoc -- --watch",
-    "clean": "rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
+    "clean": "cross-var rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
     "clear": "npm run clean",
-    "test": "echo '\nRun tests here!\n'"
+    "test": "echo-cli \"\\nRun tests here!\\n\""
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
@@ -79,7 +80,9 @@
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
+    "cross-var": "^1.1.0",
     "css-loader": "^6.7.1",
+    "echo-cli": "^2.0.0",
     "glob": "^8.0.3",
     "jasmine-core": "^4.5.0",
     "karma": "^6.4.1",

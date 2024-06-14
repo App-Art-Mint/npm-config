@@ -22,10 +22,11 @@ export class mintUpdate {
             'appartmint',
             'app-art-mint'
         ],
-        main: 'dist/js/index.min.js',
-        types: 'dist/js/index.d.ts',
+        main: 'src/ts/index.ts',
+        type: 'module',
         files: [
-            'dist/**/*.{css,js,d.ts,map}'
+            'dist/**/*.{css,js,d.ts,map}',
+            "src/**/*.{ts,scss}"
         ],
         directories: {
             dist: 'dist',
@@ -47,9 +48,9 @@ export class mintUpdate {
         },
         scripts: {
             upgrade: 'npm up -D @appartmint/config && mint-config',
-            build: 'webpack --config $npm_package_config_webpack',
-            'build:sassdoc': 'sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
-            serve: 'webpack serve --config $npm_package_config_webpack'
+            build: 'cross-var webpack --config $npm_package_config_webpack',
+            'build:sassdoc': 'cross-var sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
+            serve: 'cross-var webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
             '@appartmint/util': '^0.7.5'
@@ -106,7 +107,7 @@ export class mintUpdate {
         repository: this.oldPackageJson.repository ?? {},
         bugs: this.oldPackageJson.bugs ?? {},
         main: this.updates.main,
-        types: this.updates.types,
+        type: this.updates.type,
         files: [
             ...new Set([
                 ...this.oldPackageJson.files,
@@ -130,6 +131,7 @@ export class mintUpdate {
             postversion: this.newScripts.postversion,
             clean: this.newScripts.clean,
             clear: this.newScripts.clear,
+            bundle: this.newScripts.bundle,
             build: this.newScripts.build,
             'build:prod': this.newScripts['build:prod'],
             'build:index': this.newScripts['build:index'],

@@ -100,7 +100,7 @@ export class mintUpdate {
         keywords: [
             ...new Set([
                 ...this.updates.keywords,
-                ...this.oldPackageJson.keywords?.sort()
+                ...(this.oldPackageJson.keywords ?? []).sort()
             ])
         ],
         homepage: this.oldPackageJson.homepage ?? 'https://www.appartmint.com',

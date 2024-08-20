@@ -53,7 +53,7 @@ export class mintUpdate {
             serve: 'cross-var webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            '@appartmint/util': '^0.7.5'
+            '@appartmint/util': '^0.9.0'
         },
         ignoreDevDependencies: [
             '@types/glob',
@@ -100,7 +100,7 @@ export class mintUpdate {
         keywords: [
             ...new Set([
                 ...this.updates.keywords,
-                ...this.oldPackageJson.keywords.sort()
+                ...this.oldPackageJson.keywords?.sort()
             ])
         ],
         homepage: this.oldPackageJson.homepage ?? 'https://www.appartmint.com',

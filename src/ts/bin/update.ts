@@ -83,7 +83,7 @@ export class mintUpdate {
      * The new scripts to write to the package.json
      */
      private newScripts: any = sunUtil.sortObject({
-        ...this.oldPackageJson.scripts,
+        ...(this.oldPackageJson.scripts ?? {}),
         ...this.thisPackageJson.scripts,
         ...this.updates.scripts
     });
@@ -110,17 +110,17 @@ export class mintUpdate {
         type: this.updates.type,
         files: [
             ...new Set([
-                ...this.oldPackageJson.files,
+                ...(this.oldPackageJson.files ?? []),
                 ...this.updates.files
             ])
         ],
         directories: this.updates.directories,
         publishConfig: sunUtil.sortObject({
-            ...this.oldPackageJson.publishConfig,
+            ...(this.oldPackageJson.publishConfig ?? {}),
             ...this.updates.publishConfig
         }),
         config: sunUtil.sortObject({
-            ...this.oldPackageJson.config,
+            ...(this.oldPackageJson.config ?? {}),
             ...this.updates.config
         }),
         scripts: {
@@ -148,14 +148,14 @@ export class mintUpdate {
             ...sunUtil.sortObject(this.newScripts)
         },
         dependencies: sunUtil.sortObject({
-            ...this.oldPackageJson.dependencies,
+            ...(this.oldPackageJson.dependencies ?? {}),
             ...sunUtil.removeObjectEntries(
                 this.updates.dependencies,
                 [this.oldPackageJson.name]
             )
         }),
         devDependencies: sunUtil.sortObject({
-            ...this.oldPackageJson.devDependencies,
+            ...(this.oldPackageJson.devDependencies ?? {}),
             ...sunUtil.removeObjectEntries(
                 this.thisPackageJson.devDependencies,
                 this.updates.ignoreDevDependencies

@@ -1,7 +1,7 @@
 {
   "name": "@appartmint/config",
   "author": "App/Art Mint",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "license": "MIT",
   "description": "Config files for the @appartmint suite of npm libraries",
   "keywords": [
@@ -51,9 +51,6 @@
   },
   "scripts": {
     "prepare": "npm-run-all clean bundle",
-    "preversion": "npm i && npm run test",
-    "version": "npm publish && git add -A",
-    "postversion": "git push && git push --tags && npm run endversion --if-present",
     "bundle": "npm-run-all build build:**",
     "build": "cross-var webpack --config $npm_package_config_dirs_src/$npm_package_config_dirs_ts/$npm_package_config_dirs_config/webpack.config.ts",
     "build:prod": "cross-env NODE_ENV=production npm run build",

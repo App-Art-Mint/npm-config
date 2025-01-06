@@ -47,13 +47,13 @@ export class mintUpdate {
             }
         },
         scripts: {
-            upgrade: 'npm up -D @appartmint/config && mint-config',
+            upgrade: 'npm i -D @appartmint/config@latest && mint-config',
             build: 'cross-var webpack --config $npm_package_config_webpack',
             'build:sassdoc': 'cross-var sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json',
             serve: 'cross-var webpack serve --config $npm_package_config_webpack'
         },
         dependencies: {
-            '@appartmint/util': '^0.9.0'
+            '@appartmint/util': '^1.0.0'
         },
         ignoreDevDependencies: [
             '@types/glob',
